@@ -53,8 +53,23 @@
         <script src="app/domain/negociacao/Negociacao.js"></script>
         
         <script>
-            var n1 = new Negociacao(new Date(), 10, 3.0);
+            var outroDia = new Date();
+            outroDia.setDate(22);
+
+            var n1 = new Negociacao(outroDia, 10, 3.0);
+
+            outroDia = setDate(30)
+
             var volume = n1.volume;
+            
+            n1.quantidade = 30;
+            console.log(n1.quantidade);
+
+            n1.data.setDate(15);
+
+            n1._quantidade = 50;
+            console.log(n1._quantidade);
+
             console.log(n1)
             console.log(n1.data)
         </script>
