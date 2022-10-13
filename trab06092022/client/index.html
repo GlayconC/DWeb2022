@@ -51,16 +51,20 @@
         </table>
         <!--<script src="app/index.js"></script>-->
         <script src="app/domain/negociacao/Negociacao.js"></script>
-        
+        <script src="app/controllers/NegociacaoController.js"></script>
+        <script src="app/ui/converters/DateConverter.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/domain/negociacao/Negociacoes.js"></script>
+
         <script>
-            var outroDia = new Date();
+            let outroDia = new Date();
             outroDia.setDate(22);
 
-            var n1 = new Negociacao(outroDia, 10, 3.0);
+            let n1 = new Negociacao(outroDia, 10, 3.0);
 
             outroDia = setDate(30)
 
-            var volume = n1.volume;
+            let volume = n1.volume;
             
             n1.quantidade = 30;
             console.log(n1.quantidade);
@@ -73,17 +77,24 @@
             console.log(n1)
             console.log(n1.data)
 
-            var origem1 = {nome: 'Marcondes'};
-            var origem2 = {sobrenome: 'Maçaneiro'}
+            let origem1 = {nome: 'Marcondes'};
+            let origem2 = {sobrenome: 'Maçaneiro'}
 
-            var copia = Object.assign({}, origem1, origem2);
+            let copia = Object.assign({}, origem1, origem2);
 
             console.log(copia)
 
-            var nome='Marcondes';
+            let nome='Marcondes';
 
-            var objeto = {nome};
+            let objeto = {nome};
             console.log(objeto);
+
+            for (let i = 1; i <=100; i++){
+                let nome='glaycon';
+                console.log(i);
+            }
+            alert(nome);
+            alert(i);
         </script>
 
     </body>
