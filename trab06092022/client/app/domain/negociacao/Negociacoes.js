@@ -7,6 +7,7 @@ class Negociacoes{
     }
 
     adiciona(negociacao) {
+        console.log(this)
         this._negociacoes.push(negociacao);
    
 

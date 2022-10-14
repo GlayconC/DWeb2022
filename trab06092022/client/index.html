@@ -89,22 +89,48 @@
             }
             alert(nome);
             alert(i);*/
-            const negociacao = new Proxy(new Negociacao(new Date(), 2, 100),{
+           /* const negociacao = new Proxy(new Negociacao(new Date(), 2, 100),{
                 get(target, prop, receiver) {
                     console.log(`A propriedade "${prop}" caiu na armadilha `)
                     return target[prop] = value;                   
                 },
 
-                set(target, prop, vlue, receiver){
-                    console.log(`${prop} guarda ${targe[prop]}, recebera ${value}`)
+                set(target, prop, value, receiver){
+                    console.log(`${prop} guarda ${target[prop]}, recebera ${value}`)
                     target[prop]
-                    return target[prop] == value;
+                    return Reflect.set(target, prop, value)
                 }
             });
             console.log(negociacao.quantidade);
             console.log(negociacao.valor);
             negociacao._quantidade = 10;
             negociacao.valor = 200;
+
+            const negociacoes = new Proxy(new Negociacoes(), {
+                get(target, prop, receiver) {
+                    if(typeof(target[prop]) == typeof(Function) 
+                    && ['adiciona', 'esvazia'].includes(prop)){
+                        return function(){
+                            console.log(`${prop} disparou a armadilha`)
+                            target[prop].apply(target, arguments);
+                        }
+                    } else{
+                        return target[prop]
+                    }
+                },
+                set(target, prop, value){
+                    console.log(`${prop} guarda ${target[prop]}, ${value}`)
+                    return Reflect.set(target, prop, value);
+                }
+            })
+            negociacoes.adiciona(new Negociacoes(new Date(), 1, 200))
+           // negociacoes.esvazia();
+
+           function exibeNomeCompleto() {
+                console.log(arguments[0], arguments[1])
+           }
+
+            exibeNomeCompleto('M', 'C')     */      
         </script>
 
     </body>
