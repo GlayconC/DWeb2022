@@ -6,3 +6,5 @@ document.querySelector('form').addEventListener('submit', function(e) {
 
 document.querySelector('#notao-apagar')
 .addEventListener('click', controller.apaga.bind(controller))
+
+document.querySelector('#botao-importa').addEventListener('click', controller.importaNegociacoes.bind(controller))
