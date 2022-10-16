@@ -5,28 +5,32 @@ class NegociacaoController{
         this._inputData = $("#data")
         this._inputQuantidade = $("#quantidade")
         this._inputValor = $("#valor")
-        this._negociacoes = ProxyFactory.create(new Negociacoes(),['adiciona', 'esvazia'],
-            model => this._negociacoesView.update(model)
+        this._negociacoes = new Bind(new Negociacoes(), new NegociacoesView('#negociacoes'),
+        'adiciona', 'esvazia'
         );    
-        this._negociacoesView = new NegociacoesViews('#negociacoes'); 
-        this._negociacoesView.update(this._negociacoes)   
-        this._mensagem = ProxyFactory.create(
-            new Mensagem ['texto'], 
-            this._mensagemView.update(model)
-        );
-        this._mensagemView = new MensagemView('#mensagemView');
-        this._mensagemView.update(this._mensagem);
+       
+        this._mensagem = new Bind(new Mensagem(), new MensagemView('#mensagemView'), 'texto');
     }
 
     adiciona(event) {
-        event.preventDefault()
-        this._negociacoes.adiciona(this._criaNegociacao());
-        this._mensagem.textp = 'Negociação adicionada com sucesso!'
-        this._limparFormulario();
+        try{
+            event.preventDefault()
+            this._negociacoes.adiciona(this._criaNegociacao());
+            this._mensagem.textp = 'Negociação adicionada com sucesso!'
+            this._limparFormulario();
+        } catch(err){
+            console.log(err);
+            if (err instanceof DataInvalidaException){
+                this._mensagem.texto = err.mensagem
+            } else {
+                this._mensagem.texto = "Um erro não esperado aconteceu. Entre em contato com o suporte"
+            }
+            
+        }
     }
 
     _limparFormulario(){
-        this._inputData.value= '2020-01-01';
+        this._inputData.value= '01/01/2020';
         this._inputQuantidade.value = 1;
         this._inputValor.value = 2.0;
         this._inputData.focus();
